@@ -1,7 +1,9 @@
-package com.example.xyzreader2;
+package com.example.xyzreader2.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.xyzreader2.R;
 
 public class ArticleListActivity extends AppCompatActivity {
 
