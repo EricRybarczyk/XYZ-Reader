@@ -14,7 +14,7 @@
         <item name="android:textColor">@color/subduedTextColor</item>
     </style>
 
-    <style name="ArticleBody">
+    <style name="ArticleBody" parent="AppTheme">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/subduedTextColor</item>
     </style>

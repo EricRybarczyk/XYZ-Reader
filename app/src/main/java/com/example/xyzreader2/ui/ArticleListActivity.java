@@ -43,6 +43,7 @@ public class ArticleListActivity extends AppCompatActivity implements LoaderMana
     @BindView(R.id.recycler_view) protected RecyclerView recyclerView;
 
     private static final String TAG = ArticleListActivity.class.getSimpleName();
+
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
