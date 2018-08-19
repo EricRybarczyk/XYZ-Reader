@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">XYZ Reader</string>
+
+
+    <!--accessibility items-->
+    <string name="aria_article_thumbnail_image">Article Thumbnail Image</string>
+    <string name="aria_divider_line">Divider Line</string>
 </resources>
