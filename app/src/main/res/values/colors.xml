@@ -10,6 +10,7 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="subduedTextColor">#202020</color>
+    <color name="lightTextColor">#bdbdbd</color>
     <color name="dividerLineColor">#ccc</color>
     <color name="photo_placeholder">#ccc</color>
     <!-- these should probably be more generic names and no dups, and them refine them in styles-->

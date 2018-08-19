@@ -21,54 +21,84 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="8dp"
-            app:expandedTitleMarginEnd="8dp">
+            app:expandedTitleMarginStart="@dimen/detail_inner_horiz_margin"
+            app:expandedTitleMarginEnd="@dimen/detail_inner_horiz_margin"
+            style="@style/ArticleHeadline">
+
+            <!--app:expandedTitleMarginStart="@dimen/detail_inner_horiz_margin"-->
+            <!--app:expandedTitleMarginEnd="@dimen/detail_inner_horiz_margin"-->
             <!--app:contentScrim="?attr/colorPrimary"-->
             <!--@drawable/scrim_article_headline_photo-->
             <!--app:expandedTitleMarginStart="48dp"-->
             <!--app:expandedTitleMarginEnd="64dp"-->
 
-            <ImageView
-                android:id="@+id/photo"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                android:contentDescription="@string/aria_article_photo" />
+                android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:layout_collapseMode="pin"><!-- ?attr/actionBarSize -->
-                <!--android:layout_marginLeft="@dimen/list_toolbar_side_margin"-->
-                <!--android:layout_marginRight="@dimen/list_toolbar_side_margin"-->
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax"
+                    android:contentDescription="@string/aria_article_photo" />
 
-                <TextView
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/scrim_article_headline_photo" />
+
+                <!-- TextView
                     android:id="@+id/article_title"
-                    style="?android:attr/textAppearanceLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="@dimen/detail_inner_horiz_margin"
+                    android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
+                    style="@style/ArticleHeadline"/ -->
+                <!--
+                    android:lineSpacingMultiplier="0.9"
+                    style="?android:attr/textAppearanceLarge"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="#fff"
                     android:textStyle="bold"
                     android:textSize="@dimen/detail_title_text_size"
-                    android:lineSpacingMultiplier="0.9" />
+                android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"-->
 
                 <TextView
                     android:id="@+id/article_byline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="@dimen/detail_inner_horiz_margin"
+                    android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
+                    style="@style/ArticleByline"/>
                 <!--
                     style="?android:attr/textAppearanceSmall"
                     android:textColor="#8fff"
                     -->
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:layout_collapseMode="pin"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
+
+                <!--android:layout_marginStart="@dimen/detail_inner_horiz_margin"-->
+                <!--android:layout_marginEnd="@dimen/detail_inner_horiz_margin"-->
+                <!-- ?attr/actionBarSize -->
+                <!--android:layout_marginLeft="@dimen/list_toolbar_side_margin"-->
+                <!--android:layout_marginRight="@dimen/list_toolbar_side_margin"-->
 
             </android.support.v7.widget.Toolbar>
 

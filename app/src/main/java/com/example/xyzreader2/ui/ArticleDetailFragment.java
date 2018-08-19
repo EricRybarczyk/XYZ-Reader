@@ -9,6 +9,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBar;
+import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,9 +53,11 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
     private static final String TAG = ArticleDetailFragment.class.getSimpleName();
 
     @BindView(R.id.photo) protected ImageView articlePhoto;
-    @BindView(R.id.article_title) protected TextView articleTitle;
+    //@BindView(R.id.article_title) protected TextView articleTitle;
     @BindView(R.id.article_byline) protected TextView articleByline;
     @BindView(R.id.article_body) protected TextView articleBody;
+    @BindView(R.id.toolbar) protected Toolbar toolbar;
+    @BindView(R.id.collapsing_toolbar) protected CollapsingToolbarLayout collapsingToolbar;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -105,7 +113,15 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
 
         ButterKnife.bind(this, rootView);
         Log.d(TAG, "onCreateView : Butterknife.bind() was called");
-        //bindViews();
+
+        AppCompatActivity parentActivity = ((AppCompatActivity)getActivity());
+        ActionBar actionBar = parentActivity.getSupportActionBar();
+        parentActivity.setSupportActionBar(toolbar);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(v -> parentActivity.onBackPressed());
 
         return rootView;
     }
@@ -145,19 +161,42 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
         }
         rootView.setVisibility(View.VISIBLE);
         Log.d(TAG, "bindViews : begin binding");
+
         Picasso.with(getActivity())
             .load(articleCursor.getString(ArticleLoader.Query.PHOTO_URL))
             .into(articlePhoto);
-        articleTitle.setText(articleCursor.getString(ArticleLoader.Query.TITLE));
-        // TODO: format byline and then articleByline.setText();
+
+        String title = articleCursor.getString(ArticleLoader.Query.TITLE);
+        //articleTitle.setText(title);
+        collapsingToolbar.setTitle(title);
+        //toolbar.setTitle(title);
+
+
+        Date publishedDate = parsePublishedDate(articleCursor.getString(ArticleLoader.Query.PUBLISHED_DATE));
+        String author = articleCursor.getString(ArticleLoader.Query.AUTHOR);
+
+        if (!publishedDate.before(START_OF_EPOCH.getTime())) {
+            articleByline.setText(Html.fromHtml(
+                    DateUtils.getRelativeTimeSpanString(
+                            publishedDate.getTime(),
+                            System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                            DateUtils.FORMAT_ABBREV_ALL).toString()
+                            + " by " + author));
+
+        } else {
+            // If date is before 1902, just show the string
+            articleByline.setText(Html.fromHtml(
+                    outputFormat.format(publishedDate) + " by " + author));
+
+        }
 
         String fullArticle = articleCursor.getString(ArticleLoader.Query.BODY);
         Log.d(TAG, "Article Length: " + String.valueOf(fullArticle.length()) + "for itemId = " + String.valueOf(itemId));
         String introArticle;
         if (fullArticle.length() >= 2000) {
-            introArticle = String.valueOf(itemId) + ": " + fullArticle.substring(0, 2000);
+            introArticle = fullArticle.substring(0, 2000);
         } else {
-            introArticle = String.valueOf(itemId) + ": " + fullArticle;
+            introArticle = fullArticle;
         }
         articleBody.setText(introArticle);
         Log.d(TAG, "Intro Length: " + String.valueOf(introArticle.length()));
@@ -167,6 +206,15 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
     }
 
 
+    private Date parsePublishedDate(String dateString) {
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException ex) {
+            Log.e(TAG, ex.getMessage());
+            Log.i(TAG, "passing today's date");
+            return new Date();
+        }
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
