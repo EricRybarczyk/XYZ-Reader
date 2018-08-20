@@ -1,30 +1,30 @@
 package com.example.xyzreader2.ui;
 
-import com.example.xyzreader2.R;
-import com.example.xyzreader2.data.ArticleLoader;
-import com.example.xyzreader2.data.ItemsContract;
-import com.example.xyzreader2.data.UpdaterService;
-import com.squareup.picasso.Picasso;
-
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.os.Bundle;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.xyzreader2.R;
+import com.example.xyzreader2.data.ArticleLoader;
+import com.example.xyzreader2.data.ItemsContract;
+import com.example.xyzreader2.data.UpdaterService;
+import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,14 +34,17 @@ import java.util.GregorianCalendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-// TODO - SwipeRefreshLayout ( including BroadcastReceiver, onStart() and onStop() from v1 code )
 
-public class ArticleListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ArticleListActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<Cursor>,
+        SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar) protected Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar) protected CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.recycler_view) protected RecyclerView recyclerView;
+    @BindView(R.id.swipe_refresh_layout) protected SwipeRefreshLayout swipeRefreshLayout;
 
+    private static final int LOADER_ID = 5150;
     private static final String TAG = ArticleListActivity.class.getSimpleName();
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
@@ -59,7 +62,9 @@ public class ArticleListActivity extends AppCompatActivity implements LoaderMana
         setSupportActionBar(toolbar);
         collapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
-        getLoaderManager().initLoader(0, null, this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        getLoaderManager().initLoader(LOADER_ID, null, this);
 
         if (savedInstanceState == null) {
             refresh();
@@ -83,11 +88,19 @@ public class ArticleListActivity extends AppCompatActivity implements LoaderMana
         adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         recyclerView.setAdapter(null);
+    }
+
+    @Override
+    public void onRefresh() {
+        Log.d(TAG, "SwipeRefresh event handled.");
+        ((ArticleOverviewAdapter)recyclerView.getAdapter()).clearForRefresh();
+        getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
 
@@ -119,6 +132,13 @@ public class ArticleListActivity extends AppCompatActivity implements LoaderMana
                 }
             });
             return vh;
+        }
+
+        void clearForRefresh() {
+            if (articleCursor != null && !articleCursor.isClosed()) {
+                Log.d(TAG, "closing the cursor on refresh");
+                articleCursor.close();
+            }
         }
 
         private Date parsePublishedDate() {
