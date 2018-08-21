@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBar;
@@ -21,9 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.xyzreader2.R;
 import com.example.xyzreader2.data.ArticleLoader;
+import com.example.xyzreader2.util.AppendTextScrollHandler;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -50,6 +53,7 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
     private long itemId;
     private Cursor articleCursor;
     private OnFragmentInteractionListener fragmentInteractionListener;
+    private int priorScrollY;
     private static final String TAG = ArticleDetailFragment.class.getSimpleName();
 
     @BindView(R.id.photo) protected ImageView articlePhoto;
@@ -58,6 +62,7 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
     @BindView(R.id.article_body) protected TextView articleBody;
     @BindView(R.id.toolbar) protected Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar) protected CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.article_scroll_container) protected NestedScrollView scrollView;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -193,14 +198,15 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
         String fullArticle = articleCursor.getString(ArticleLoader.Query.BODY);
         Log.d(TAG, "Article Length: " + String.valueOf(fullArticle.length()) + "for itemId = " + String.valueOf(itemId));
         String introArticle;
-        if (fullArticle.length() >= 2000) {
-            introArticle = fullArticle.substring(0, 2000);
+        if (fullArticle.length() >= AppendTextScrollHandler.TEXT_SEGMENT_SIZE) {
+            introArticle = fullArticle.substring(0, AppendTextScrollHandler.TEXT_SEGMENT_SIZE);
+            Log.d(TAG, "calling setOnScrollChangeListener");
+            scrollView.setOnScrollChangeListener(new AppendTextScrollHandler(articleBody, fullArticle));
         } else {
             introArticle = fullArticle;
         }
         articleBody.setText(introArticle);
         Log.d(TAG, "Intro Length: " + String.valueOf(introArticle.length()));
-        // TODO: load remaining article text - IF ANY - via scroll event
 
         Log.d(TAG, "bindViews : done binding");
     }
