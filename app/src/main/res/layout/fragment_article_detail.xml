@@ -25,13 +25,6 @@
             app:expandedTitleMarginEnd="@dimen/detail_inner_horiz_margin"
             style="@style/ArticleHeadline">
 
-            <!--app:expandedTitleMarginStart="@dimen/detail_inner_horiz_margin"-->
-            <!--app:expandedTitleMarginEnd="@dimen/detail_inner_horiz_margin"-->
-            <!--app:contentScrim="?attr/colorPrimary"-->
-            <!--@drawable/scrim_article_headline_photo-->
-            <!--app:expandedTitleMarginStart="48dp"-->
-            <!--app:expandedTitleMarginEnd="64dp"-->
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -50,24 +43,6 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/scrim_article_headline_photo" />
 
-                <!-- TextView
-                    android:id="@+id/article_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginStart="@dimen/detail_inner_horiz_margin"
-                    android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
-                    style="@style/ArticleHeadline"/ -->
-                <!--
-                    android:lineSpacingMultiplier="0.9"
-                    style="?android:attr/textAppearanceLarge"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/detail_title_text_size"
-                android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"-->
-
                 <TextView
                     android:id="@+id/article_byline"
                     android:layout_width="wrap_content"
@@ -77,10 +52,7 @@
                     android:layout_marginStart="@dimen/detail_inner_horiz_margin"
                     android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
                     style="@style/ArticleByline"/>
-                <!--
-                    style="?android:attr/textAppearanceSmall"
-                    android:textColor="#8fff"
-                    -->
+
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
@@ -93,12 +65,6 @@
                 app:contentInsetStart="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetEnd="0dp">
-
-                <!--android:layout_marginStart="@dimen/detail_inner_horiz_margin"-->
-                <!--android:layout_marginEnd="@dimen/detail_inner_horiz_margin"-->
-                <!-- ?attr/actionBarSize -->
-                <!--android:layout_marginLeft="@dimen/list_toolbar_side_margin"-->
-                <!--android:layout_marginRight="@dimen/list_toolbar_side_margin"-->
 
             </android.support.v7.widget.Toolbar>
 
@@ -122,8 +88,6 @@
             android:background="#fff"
             android:elevation="2dp"
             android:layout_marginTop="1dp">
-            <!-- android:layout_marginTop="260dp"
-             android:layout_marginTop="@dimen/detail_card_top_margin"-->
 
             <TextView
                 android:id="@+id/article_body"
@@ -135,12 +99,23 @@
                 android:paddingBottom="@dimen/detail_body_bottom_margin"
                 android:textSize="@dimen/detail_body_text_size"
                 android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier" />
-            <!--style="?android:attr/textAppearanceMedium" android:textColor="@color/ltgray" -->
-            <!--android:textColorLink="@color/theme_accent"-->
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/share_fab"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/article_scroll_container"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/baseline_share_24"
+        android:elevation="@dimen/fab_elevation"
+        android:clickable="true"
+        android:focusable="true" />
 
 
 </android.support.design.widget.CoordinatorLayout>

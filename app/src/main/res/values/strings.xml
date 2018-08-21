@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">XYZ Reader</string>
-
+    <string name="action_share">Share</string>
+    <string name="share_intro">I\'m reading a great book in XYZ Reader, you should check it out:</string>
 
     <!--accessibility items-->
     <string name="aria_article_thumbnail_image">Article Thumbnail Image</string>
     <string name="aria_divider_line">Divider Line</string>
     <string name="aria_article_photo">Article Photo</string>
+    <string name="share_subject">Check out this book in XYZ Reader</string>
 </resources>

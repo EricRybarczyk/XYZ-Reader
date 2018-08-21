@@ -1,5 +1,6 @@
 package com.example.xyzreader2.ui;
 
+import android.content.Intent;
 import android.content.Loader;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -63,6 +66,7 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
     @BindView(R.id.toolbar) protected Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar) protected CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.article_scroll_container) protected NestedScrollView scrollView;
+    @BindView(R.id.share_fab) protected FloatingActionButton fab;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -148,11 +152,7 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
         super.onDetach();
         fragmentInteractionListener = null;
     }
-
-        //        @BindView(R.id.photo) protected ImageView photoView;
-        //        @BindView(R.id.article_title) protected TextView articleTitle;
-        //        @BindView(R.id.article_byline) protected TextView articleByline;
-        //        @BindView(R.id.article_body) protected TextView articleBody;
+    
     private void bindViews() {
         Log.d(TAG, "bindViews : Enter for itemId = " + String.valueOf(itemId));
         if (rootView == null) {
@@ -207,6 +207,14 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
         }
         articleBody.setText(introArticle);
         Log.d(TAG, "Intro Length: " + String.valueOf(introArticle.length()));
+
+        String shareText = getString(R.string.share_intro) + "\r\n\t" + title + "\r\n\t" + articleByline.getText().toString();
+
+        fab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
+                .setType("text/plain")
+                .setText(shareText)
+                .setSubject(getString(R.string.share_subject))
+                .getIntent(), getString(R.string.action_share))));
 
         Log.d(TAG, "bindViews : done binding");
     }
