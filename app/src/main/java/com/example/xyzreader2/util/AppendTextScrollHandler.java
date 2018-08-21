@@ -40,16 +40,19 @@ public class AppendTextScrollHandler implements NestedScrollView.OnScrollChangeL
 
     private String getMoreArticleText() {
         if (!moreTextAvailable) return "";
+        int startIndex = priorSegmentEndIndex + 1;
+        int maxIndex = fullTextContent.length() - 1;
         String result;
-        if (priorSegmentEndIndex + TEXT_SEGMENT_SIZE > fullTextContent.length()) {
+        if (startIndex + TEXT_SEGMENT_SIZE > maxIndex) {
             // return the remaining substring
-            result = fullTextContent.substring(priorSegmentEndIndex, (fullTextContent.length() - 1));
-            priorSegmentEndIndex = priorSegmentEndIndex + result.length();
+            result = fullTextContent.substring(startIndex, maxIndex);
+            priorSegmentEndIndex = maxIndex;
             moreTextAvailable = false;
         } else {
-            result = fullTextContent.substring(priorSegmentEndIndex, (priorSegmentEndIndex + TEXT_SEGMENT_SIZE));
+            result = fullTextContent.substring(startIndex, (priorSegmentEndIndex + TEXT_SEGMENT_SIZE));
             priorSegmentEndIndex = priorSegmentEndIndex + TEXT_SEGMENT_SIZE;
         }
+        Log.d(TAG, "getMoreArticleText - Appending " + String.valueOf(result.length()));
         return result;
     }
 }
