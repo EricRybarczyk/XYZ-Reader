@@ -25,8 +25,14 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- toolbars -->
+    <dimen name="main_appbar_height">140dp</dimen>
+    <dimen name="collapsing_toolbar_title_margin_start">48dp</dimen>
+    <dimen name="collapsing_toolbar_title_margin_end">64dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
-    <dimen name="appbar_height">260dp</dimen>
+    <dimen name="detail_appbar_height">260dp</dimen>
     <dimen name="toolbar_inset">0dp</dimen>
+    <dimen name="main_logo_padding_start">12dp</dimen>
+    <dimen name="main_logo_padding_end">12dp</dimen>
+    <dimen name="main_logo_padding_bottom">6dp</dimen>
 
 </resources>

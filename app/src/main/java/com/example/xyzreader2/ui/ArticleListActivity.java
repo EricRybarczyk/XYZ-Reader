@@ -65,7 +65,7 @@ public class ArticleListActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+        collapsingToolbarLayout.setTitle(" "); // getString(R.string.app_name)
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
