@@ -26,10 +26,17 @@
         <item name="android:textSize">@dimen/detail_byline_text_size</item>
         <item name="android:textColor">@color/lightTextColor</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginBottom">@dimen/detail_byline_margin_bottom</item>
+        <item name="android:layout_marginStart">@dimen/detail_inner_horiz_margin</item>
+        <item name="android:layout_marginEnd">@dimen/detail_inner_horiz_margin</item>
     </style>
 
     <style name="ArticleBody" parent="AppTheme">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/detail_body_text_size</item>
         <item name="android:textColor">@color/subduedTextColor</item>
+        <item name="android:paddingTop">32dp</item>
+        <item name="android:layout_marginStart">@dimen/detail_inner_horiz_margin</item>
+        <item name="android:layout_marginEnd">@dimen/detail_inner_horiz_margin</item>
+        <item name="android:lineSpacingMultiplier">@fraction/detail_body_line_spacing_multiplier</item>
     </style>
 </resources>

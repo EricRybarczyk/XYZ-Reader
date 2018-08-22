@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- list (recycler view) -->
+    <dimen name="list_side_margin">4dp</dimen>
+    <dimen name="list_toolbar_side_margin">0dp</dimen>
+    <dimen name="detail_inner_horiz_margin">16dp</dimen>
+    <dimen name="detail_card_max_width">10000dp</dimen> <!-- force match_parent -->
+
     <!-- article items (recycler view items) -->
     <dimen name="list_item_thumbnail_height">135dp</dimen>
     <dimen name="list_item_thumbnail_width">135dp</dimen>
@@ -11,9 +17,16 @@
     <dimen name="detail_byline_text_size">16sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
+    <dimen name="detail_byline_margin_bottom">4dp</dimen>
 
-    <dimen name="fab_elevation">2dp</dimen>
-    <dimen name="fab_press_translation_z">6dp</dimen>
-    <dimen name="fab_margin">24dp</dimen>
+    <!-- fab -->
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_press_translation_z">12dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- toolbars -->
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="appbar_height">260dp</dimen>
+    <dimen name="toolbar_inset">0dp</dimen>
 
 </resources>
