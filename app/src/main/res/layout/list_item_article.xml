@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/extraLightColor">
 
     <com.example.xyzreader2.ui.DynamicHeightImageView
         android:id="@+id/thumbnail"
-        android:layout_width="135dp"
-        android:layout_height="135dp"
+        android:layout_width="@dimen/list_item_thumbnail_width"
+        android:layout_height="@dimen/list_item_thumbnail_height"
         android:background="@color/photo_placeholder"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"

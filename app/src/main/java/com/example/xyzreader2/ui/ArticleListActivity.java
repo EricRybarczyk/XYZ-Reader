@@ -10,20 +10,24 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.xyzreader2.R;
 import com.example.xyzreader2.data.ArticleLoader;
 import com.example.xyzreader2.data.ItemsContract;
 import com.example.xyzreader2.data.UpdaterService;
+import com.example.xyzreader2.util.AppConstants;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -46,6 +50,7 @@ public class ArticleListActivity extends AppCompatActivity
 
     private static final int LOADER_ID = 5150;
     private static final String TAG = ArticleListActivity.class.getSimpleName();
+    private boolean isTabletLayout;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -63,6 +68,10 @@ public class ArticleListActivity extends AppCompatActivity
         collapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
         swipeRefreshLayout.setOnRefreshListener(this);
+
+        if (getString(R.string.screen_type).equals(AppConstants.SCREEN_TABLET)) {
+            isTabletLayout = true;
+        }
 
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
@@ -87,7 +96,14 @@ public class ArticleListActivity extends AppCompatActivity
         ArticleOverviewAdapter adapter = new ArticleOverviewAdapter(this, data);
         adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.LayoutManager layoutManager;
+        if (isTabletLayout) {
+            int gridColumns = getResources().getInteger(R.integer.grid_columns);
+            layoutManager = new GridLayoutManager(this, gridColumns);
+        } else {
+            layoutManager = new LinearLayoutManager(this);
+        }
+        recyclerView.setLayoutManager(layoutManager);
         swipeRefreshLayout.setRefreshing(false);
     }
 

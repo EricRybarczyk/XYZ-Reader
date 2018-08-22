@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- article items (recycler view items) -->
+    <dimen name="list_item_thumbnail_height">155dp</dimen>
+    <dimen name="list_item_thumbnail_width">155dp</dimen>
+    <dimen name="article_title_text_size">20sp</dimen>
+    <dimen name="article_dateline_text_size">16sp</dimen>
+
+</resources>

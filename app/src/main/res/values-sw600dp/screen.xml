@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MUST match corresponding value in AppConstants.SCREEN_TABLET -->
+    <string name="screen_type">tablet</string>
+
+    <integer name="grid_columns">2</integer>
+</resources>

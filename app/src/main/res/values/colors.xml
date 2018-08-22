@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Palette: Deep Purple and Amber-->
-    <color name="primaryColor">#4527a0</color>
-    <color name="primaryLightColor">#7953d2</color>
-    <color name="primaryDarkColor">#000070</color>
-    <color name="secondaryColor">#ffc928</color>
-    <color name="secondaryLightColor">#fffc61</color>
-    <color name="secondaryDarkColor">#c79900</color>
+    <color name="primaryColor">#512da8</color>
+    <color name="primaryLightColor">#9575cd</color>
+    <color name="primaryDarkColor">#311b92</color>
+    <color name="primaryExtraLightColor">#ede7f6</color>
+
+    <color name="secondaryColor">#ffc107</color>
+    <color name="secondaryLightColor">#ffecb3</color>
+    <color name="secondaryDarkColor">#ffa000</color>
+    <color name="secondaryExtraLightColor">#fff8e1</color>
+
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="subduedTextColor">#202020</color>
     <color name="lightTextColor">#bdbdbd</color>
+
     <color name="dividerLineColor">#ccc</color>
     <color name="photo_placeholder">#ccc</color>
-    <!-- these should probably be more generic names and no dups, and them refine them in styles-->
-    <color name="rem_headlineTextColor">#000000</color>
-    <color name="rem_articleTextColor">#000000</color>
+    <color name="extraLightColor">#fafafa</color>
 </resources>

@@ -6,11 +6,11 @@
     </style>
 
     <style name="ArticleListItem" parent="@style/TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/article_title_text_size</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
     <style name="ArticleListItemDateline" parent="@style/TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/article_dateline_text_size</item>
         <item name="android:textColor">@color/subduedTextColor</item>
     </style>
 

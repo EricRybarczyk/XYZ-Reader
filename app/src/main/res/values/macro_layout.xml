@@ -14,8 +14,8 @@
 
 
     <!-- TODO: Are these items being used? -->
-    <integer name="list_column_count">1</integer>
-    <bool name="detail_is_card">false</bool>
-    <dimen name="detail_photo_height">304dp</dimen>
-    <dimen name="detail_card_top_margin">@dimen/detail_photo_height</dimen>
+    <integer name="REM_list_column_count">1</integer>
+    <bool name="REM_detail_is_card">false</bool>
+    <dimen name="REM_detail_photo_height">304dp</dimen>
+    <dimen name="REM_detail_card_top_margin">@dimen/REM_detail_photo_height</dimen>
 </resources>
