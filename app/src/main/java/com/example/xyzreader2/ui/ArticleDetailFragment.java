@@ -3,7 +3,6 @@ package com.example.xyzreader2.ui;
 import android.content.Intent;
 import android.content.Loader;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.xyzreader2.R;
 import com.example.xyzreader2.data.ArticleLoader;
