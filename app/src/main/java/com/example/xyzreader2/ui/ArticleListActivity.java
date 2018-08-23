@@ -115,6 +115,7 @@ public class ArticleListActivity extends AppCompatActivity
     @Override
     public void onRefresh() {
         Log.d(TAG, "SwipeRefresh event handled.");
+        this.refresh();
         ((ArticleOverviewAdapter)recyclerView.getAdapter()).clearForRefresh();
         getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
