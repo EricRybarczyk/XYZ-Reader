@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.xyzreader2.R;
 import com.example.xyzreader2.data.ArticleLoader;
 import com.example.xyzreader2.util.AppendTextScrollHandler;
+import com.example.xyzreader2.util.ArticleReformatter;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -205,7 +206,7 @@ public class ArticleDetailFragment extends Fragment implements LoaderManager.Loa
         } else {
             introArticle = fullArticle;
         }
-        articleBody.setText(introArticle);
+        articleBody.setText(ArticleReformatter.reformatText(introArticle));
         Log.d(TAG, "Intro Length: " + String.valueOf(introArticle.length()));
 
         String shareText = getString(R.string.share_intro) + "\r\n\t" + title + "\r\n\t" + articleByline.getText().toString();

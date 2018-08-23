@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class AppendTextScrollHandler implements NestedScrollView.OnScrollChangeListener {
 
-    public static final int TEXT_SEGMENT_SIZE = 2500;
+    public static final int TEXT_SEGMENT_SIZE = 5000;
     private int priorScrollY;
     private int priorSegmentEndIndex;
     private boolean moreTextAvailable;
@@ -53,6 +53,6 @@ public class AppendTextScrollHandler implements NestedScrollView.OnScrollChangeL
             priorSegmentEndIndex = priorSegmentEndIndex + TEXT_SEGMENT_SIZE;
         }
         Log.d(TAG, "getMoreArticleText - Appending " + String.valueOf(result.length()));
-        return result;
+        return ArticleReformatter.reformatText(result);
     }
 }
